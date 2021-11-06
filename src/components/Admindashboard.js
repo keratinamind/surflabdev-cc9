@@ -1,117 +1,84 @@
-import React from "react";
-
-const people = [
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Inactive",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-
-    qty: 6,
-    price: 5000,
-    booked_date: "10/10/2021",
-    expired_date: "10/12/2021",
-    email: "jane.cooper@example.com",
-    extrareq: "1 Extra bed for small child",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-
-  // More people...
-];
+import React, { useState, useEffect } from "react";
+import axios from "../config/axios";
+import Dealsdetail from "./Dealsdetail";
+import { Link } from "react-router-dom";
 
 export default function Admindashboard() {
+  const [shoplist, setShoplist] = useState([]);
+  const [dealslist, setDealslist] = useState([]);
+  const [bookinglist, setBookinglist] = useState([]);
+  const [selectedShop, setSelectedShop] = useState(null);
+  const [selectedDeal, setSelectedDeal] = useState(null);
+  console.log(selectedShop);
+  console.log(dealslist);
+  useEffect(() => {
+    axios
+      .get(`/shop`)
+
+      .then((res) => {
+        setShoplist(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.dir(err);
+      });
+    axios
+      .get(`/dealdetail`)
+      .then((res) => {
+        setDealslist(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.dir(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/dealbooking/${selectedDeal}`)
+      .then((res) => {
+        console.log(res.data);
+        setBookinglist(res.data);
+      })
+      .catch((err) => {
+        console.dir(err);
+      });
+  }, [selectedDeal]);
+
   return (
     <div className="md:container md:mx-auto flex flex-col">
+      <div className="flex flex-row justify-center gap-4">
+        <Link className="p-4 bg-green-800 text-white" to="/adminupdatedeals">Update Deal</Link>
+        <Link className="p-4 bg-green-800 text-white" to="/admincreatedeals">Create Deal</Link>
+      </div>
+      <div className="py-20 flex flex-row gap-5">
+        <h1 className="text-green-800 ">Select shop</h1>
+        <select
+          value={selectedShop}
+          onChange={(e) => setSelectedShop(e.target.value)}
+        >
+          <option> - - - </option>
+          {shoplist.map((item, idx) => (
+            <option key={idx} value={item.id}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+        <h1 className="text-blue-800 ">Select deal</h1>
+        <select
+          value={selectedDeal}
+          onChange={(e) => setSelectedDeal(e.target.value)}
+        >
+          <option> - - -</option>
+          {dealslist
+            .filter((item) => item.shopId == selectedShop)
+            .map((item, idx) => (
+              <option key={idx} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+        </select>
+      </div>
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -128,7 +95,7 @@ export default function Admindashboard() {
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Extra Requirement
+                    Booking ID
                   </th>
                   <th
                     scope="col"
@@ -166,55 +133,48 @@ export default function Admindashboard() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {people.map((person) => (
-                  <tr key={person.email}>
+                {bookinglist.map((booking) => (
+                  <tr key={booking.customerId}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={person.image}
-                            alt=""
-                          />
-                        </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
-                            {person.name}
+                            {booking.voucherId}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {person.email}
+                            {booking.email}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
-                        {person.extrareq}
-                      </div>
-                      
+                      <div className="text-sm text-gray-900">{booking.id}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-${person.status==="Active" ? "green" : "red"}-100 text-${person.status==="Active" ? "green" : "red"}-800`}>
-                        {person.status}
+                      <span
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                        bg-${(booking.isUsed = "false" ? "green" : "red")}-100 
+                        text-${(booking.isUsed = "true"
+                          ? "green"
+                          : "red")}-800`}
+                      >
+                        {booking.isUsed}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {person.booked_date}
+                      {booking.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {person.expired_date}
+                      {booking.expiredate}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {person.qty}
+                      {booking.count}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {person.qty * person.price}
+                      {booking.totalAmount}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
+                      <a href="#" className="text-pink-600 hover:text-pink-900">
                         Edit
                       </a>
                     </td>

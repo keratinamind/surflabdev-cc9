@@ -16,13 +16,13 @@ function Footercomp() {
                 <h3>ALL CATERGORIES</h3>
               </li>
               <li>
-                <a href="./about.html">All deals</a>
+                <p>All deals</p>
               </li>
               <li>
-                <a href="./service.html">Surfspot</a>
+                <p>Surfspot</p>
               </li>
               <li>
-                <a href="./service.html">News and content</a>
+                <p>News and content</p>
               </li>
             </ul>
           </div>
@@ -32,11 +32,9 @@ function Footercomp() {
                 <h3>ADDITIONAL INFORMATION</h3>
               </li>
               <li>
-                <a href="./about.html">About us</a>
+                <p>About us</p>
               </li>
-              <li>
-                <a href="./service.html">Contact us</a>
-              </li>
+              
             </ul>
           </div>
           <div class="menubottom">
@@ -45,7 +43,7 @@ function Footercomp() {
                 <h3>LEGAL INFORMATION</h3>
               </li>
               <li>
-                <a href="./about.html">Terms & Conditions</a>
+                <p>Terms & Conditions</p>
               </li>
             </ul>
           </div>

@@ -6,7 +6,7 @@ function About() {
     return (
         <>
         <Aboutus1/>
-        <Homeaboutbox/>
+        
        </>
     )
     

@@ -18,7 +18,7 @@ function CardNews() {
                 <div class=" relative ">
                     <input type="text" id="&quot;form-subscribe-Search" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter a title"/>
                     </div>
-                    <button class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200" type="submit">
+                    <button class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-pink-200" type="submit">
                         Search
                     </button>
                 </form>
@@ -27,9 +27,9 @@ function CardNews() {
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
             <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                 <a href="#" class="w-full block h-full">
-                    <img alt="blog photo" src="/images/blog/1.jpg" class="max-h-40 w-full object-cover"/>
+                    
                     <div class="bg-white dark:bg-gray-800 w-full p-4">
-                        <p class="text-indigo-500 text-md font-medium">
+                        <p class="text-pink-500 text-md font-medium">
                             Video
                         </p>
                         <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
@@ -39,9 +39,7 @@ function CardNews() {
                             Work at home, remote, is the new age of the job, every person can work at home....
                         </p>
                         <div class="flex items-center mt-4">
-                            <a href="#" class="block relative">
-                                <img alt="profil" src="/images/person/6.jpg" class="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </a>
+                            \
                             <div class="flex flex-col justify-between ml-4 text-sm">
                                 <p class="text-gray-800 dark:text-white">
                                     Jean Jacques
@@ -56,9 +54,9 @@ function CardNews() {
             </div>
             <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                 <a href="#" class="w-full block h-full">
-                    <img alt="blog photo" src="/images/blog/2.jpg" class="max-h-40 w-full object-cover"/>
+                    
                     <div class="bg-white dark:bg-gray-800 w-full p-4">
-                        <p class="text-indigo-500 text-md font-medium">
+                        <p class="text-pink-500 text-md font-medium">
                             Oui
                         </p>
                         <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
@@ -68,9 +66,7 @@ function CardNews() {
                             The new supercar is here, 543 cv and 140 000$ !!
                         </p>
                         <div class="flex items-center mt-4">
-                            <a href="#" class="block relative">
-                                <img alt="profil" src="/images/person/6.jpg" class="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </a>
+                            
                             <div class="flex flex-col justify-between ml-4 text-sm">
                                 <p class="text-gray-800 dark:text-white">
                                     Jean Jacques
@@ -85,9 +81,9 @@ function CardNews() {
             </div>
             <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                 <a href="#" class="w-full block h-full">
-                    <img alt="blog photo" src="/images/blog/3.jpg" class="max-h-40 w-full object-cover"/>
+                    
                     <div class="bg-white dark:bg-gray-800 w-full p-4">
-                        <p class="text-indigo-500 text-md font-medium">
+                        <p class="text-pink-500 text-md font-medium">
                             Oui
                         </p>
                         <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
@@ -97,9 +93,7 @@ function CardNews() {
                             The new supercar is here, 543 cv and 140 000$ !!
                         </p>
                         <div class="flex items-center mt-4">
-                            <a href="#" class="block relative">
-                                <img alt="profil" src="/images/person/6.jpg" class="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </a>
+                            
                             <div class="flex flex-col justify-between ml-4 text-sm">
                                 <p class="text-gray-800 dark:text-white">
                                     Jean Jacques
@@ -114,9 +108,9 @@ function CardNews() {
             </div>
             <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                 <a href="#" class="w-full block h-full">
-                    <img alt="blog photo" src="/images/blog/4.jpg" class="max-h-40 w-full object-cover"/>
+                    
                     <div class="bg-white dark:bg-gray-800 w-full p-4">
-                        <p class="text-indigo-500 text-md font-medium">
+                        <p class="text-pink-500 text-md font-medium">
                         </p>
                         <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
                             test
@@ -142,9 +136,9 @@ function CardNews() {
             </div>
             <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                 <a href="#" class="w-full block h-full">
-                    <img alt="blog photo" src="/images/blog/5.jpg" class="max-h-40 w-full object-cover"/>
+                    
                     <div class="bg-white dark:bg-gray-800 w-full p-4">
-                        <p class="text-indigo-500 text-md font-medium">
+                        <p class="text-pink-500 text-md font-medium">
                         </p>
                         <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
                             test
@@ -153,9 +147,7 @@ function CardNews() {
                             The new supercar is here, 543 cv and 140 000$ !!
                         </p>
                         <div class="flex items-center mt-4">
-                            <a href="#" class="block relative">
-                                <img alt="profil" src="/images/person/6.jpg" class="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </a>
+                            
                             <div class="flex flex-col justify-between ml-4 text-sm">
                                 <p class="text-gray-800 dark:text-white">
                                     Jean Jacques
@@ -170,9 +162,9 @@ function CardNews() {
             </div>
             <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                 <a href="#" class="w-full block h-full">
-                    <img alt="blog photo" src="/images/blog/6.jpg" class="max-h-40 w-full object-cover"/>
+                    
                     <div class="bg-white dark:bg-gray-800 w-full p-4">
-                        <p class="text-indigo-500 text-md font-medium">
+                        <p class="text-pink-500 text-md font-medium">
                             Oui
                         </p>
                         <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
@@ -182,9 +174,7 @@ function CardNews() {
                             The new supercar is here, 543 cv and 140 000$ !!
                         </p>
                         <div class="flex items-center mt-4">
-                            <a href="#" class="block relative">
-                                <img alt="profil" src="/images/person/6.jpg" class="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </a>
+                            
                             <div class="flex flex-col justify-between ml-4 text-sm">
                                 <p class="text-gray-800 dark:text-white">
                                     Jean Jacques

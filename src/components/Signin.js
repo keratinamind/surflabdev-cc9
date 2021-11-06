@@ -1,7 +1,58 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext } from "react";
+import { useState } from "react";
+import {isEmail} from "validator"
+import { useHistory } from "react-router";
+import jwtDecode from 'jwt-decode';
+
 import { Link } from "react-router-dom";
+import { setToken, user } from "../services/localStorage";
+import { AuthContext } from "../contexts/authContext";
 
 function Signin() {
+  
+  const [loginInput, setLoginInput] = useState({ email: "", password: "" });
+  const [err, setErr] = useState({ email: "", password: "" });
+  const { setUser } = useContext(AuthContext);
+  const history = useHistory();
+  const handleChangeInput = (e) => {
+    if (e.target.value.trim() === "") {
+      setErr((cur) => ({
+        ...cur,
+        [e.target.name]: `${e.target.name} is required`,
+      }));
+      setLoginInput((cur) => ({ ...cur, [e.target.name]: "" }));
+    } else if (e.target.name === "email" && !isEmail(e.target.value)) {
+      setErr((cur) => ({ ...cur, [e.target.name]: "invalid email" }));
+      setLoginInput((cur) => ({ ...cur, [e.target.name]: e.target.value }));
+    } else {
+      setErr((cur) => {
+        delete cur[e.target.name];
+        return cur;
+      });
+      setLoginInput((cur) => ({ ...cur, [e.target.name]: e.target.value }));
+    }
+  };
+  const submitLogin = async (e) => {
+    try {
+      e.preventDefault();
+      Object.keys(loginInput).forEach((item) => {
+        if (loginInput[item] === "") {
+          setErr((cur) => ({ ...cur, [item]: `${item} is required` }));
+        }
+      });
+      if (!err.email && !err.password) {
+        const res = await axios.post("/customer/login", loginInput);
+        console.log(res)
+        setToken(res.data.token);
+        // setAvatar(res.data.avatar);
+        setUser(jwtDecode(res.data.token));
+        history.push("/about");
+      }
+    } catch (err) {
+      console.dir(err);
+    }
+  };
   return (
     <div>
       <div class="flex flex-col w-screen max-w-xl px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
@@ -26,8 +77,11 @@ function Signin() {
                 <input
                   type="text"
                   id="sign-in-email"
+                  name="email"
                   class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   placeholder="Your email"
+                  onChange={handleChangeInput}
+                  value={loginInput.email}
                 />
               </div>
             </div>
@@ -46,9 +100,12 @@ function Signin() {
                 </span>
                 <input
                   type="password"
+                  name="password"
                   id="sign-in-email"
                   class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   placeholder="Your password"
+                  onChange={handleChangeInput}
+                  value={loginInput.password}
                 />
               </div>
             </div>
@@ -65,6 +122,7 @@ function Signin() {
             <div class="flex w-full">
               <button
                 type="submit"
+                onClick={submitLogin}
                 class="py-2 px-4  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
               >
                 Login
@@ -72,11 +130,11 @@ function Signin() {
             </div>
           </form>
         </div>
-        <Link to="/signup">
+        <Link to="/register">
           <div class="flex items-center justify-center mt-6">
-            
-              <span class="ml-2 text-sm font-thin text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white">You don&#x27;t have an account?</span>
-            
+            <span class="ml-2 text-sm font-thin text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white">
+              You don&#x27;t have an account?
+            </span>
           </div>
         </Link>
       </div>

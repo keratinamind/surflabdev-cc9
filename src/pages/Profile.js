@@ -1,12 +1,14 @@
-import React from 'react'
-import Profiledashboard from '../components/Profiledashboard'
-import Signin from '../components/Signin'
+import React from "react";
+import Profiledashboard from "../components/Profiledashboard";
+import NavProfile from "./NavProfile";
 
 function Profile() {
-    return (
-        
-            <Profiledashboard/>
-    )
+  return (
+    <>
+      <NavProfile/>
+      <Profiledashboard />
+    </>
+  );
 }
 
-export default Profile
+export default Profile;

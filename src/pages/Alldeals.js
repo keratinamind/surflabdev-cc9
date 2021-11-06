@@ -1,10 +1,26 @@
 import Card from '../components/Card'
-import React from 'react'
+import { useEffect , useState } from 'react'
+import axios from 'axios';
+
 
 function Alldeals() {
+
+    const [category , setCategory] = useState([]);
+    console.log(category);
+
+    useEffect(() => {
+        axios.get('/dealcategory')
+        .then((res)=> setCategory(res.data.getAllCategory))
+        .catch(err => {
+            console.log(err)
+        });
+}, []);
+
+
+
     return (
         <div>
-            <Card></Card>
+            {category.map(item => <Card key={item.id} name={item.name} id={item.id}/>)}
         </div>
     )
 }

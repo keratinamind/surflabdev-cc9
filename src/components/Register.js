@@ -2,25 +2,80 @@ import React from "react";
 import Image from "../images/photo-1530035415911-95194de4ebcc.jpg";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import {isEmail} from "validator";
+import axios from "../config/axios";
+import ErrFeedback from "../services/ErrFeedback";
 
 function Register() {
-  // const [registerInput, setRegisterInput] = useState({ username: "", email: "", password: "", passwordconfirm: ""})
-  // const [err, setErr] = useState({ username: "", email: "", password: "", passwordconfirm: ""})
-  // const history = useHistory();
+  const [clickConfirm, setClickConfirm] = useState(false);
 
-  // const handleChangeInput = (e) => {
-  //   if(e.target.value.trim() === "" ){
-  //     setErr((cur) => ({ ...cur,[e.target.name]: `${e.target.name} is required`}));
-  //     set
-  //   }
-  // }
-  // const submidRegister = async (e) => {
-  //   try {
-      
-  //   } catch (err) {
-      
-  //   }
-  // }
+ 
+  const [registerInput, setRegisterInput] = useState({
+    username: "",
+    email: "",
+    password: "",
+    passwordconfirm: "",
+  });
+  const [err, setErr] = useState({
+    username: "",
+    email: "",
+    password: "",
+    passwordconfirm: "",
+  });
+  const history = useHistory();
+
+  const handleClickCheckBox = (e) => {
+    setClickConfirm(e.target.value);
+  }
+
+  const handleChangeInput = (e) => {
+    if (e.target.value.trim() === "") {
+      setErr((cur) => ({
+        ...cur,
+        [e.target.name]: `${e.target.name} is required`,
+      }));
+      setRegisterInput((cur) => ({ ...cur, [e.target.name]: "" }));
+    } else if (e.target.name === "email" && !isEmail(e.target.value)) {
+      setErr((cur) => ({ ...cur, [e.target.name]: "invalid email" }));
+      setRegisterInput((cur) => ({ ...cur, [e.target.name]: e.target.value }));
+    } else {
+      setErr((cur) => {
+        delete cur[e.target.name];
+        return cur;
+      });
+      setRegisterInput((cur) => ({ ...cur, [e.target.name]: e.target.value }));
+    }
+  };
+  const submitRegister = async (e) => {
+    try {
+      e.preventDefault();
+      if (!clickConfirm) {
+        alert('Please accept the term & condition');
+        return
+      }
+      Object.keys(registerInput).forEach((item) => {
+        if (registerInput[item] === "") {
+          setErr((cur) => ({ ...cur, [item]: `${item} is required` }));
+        }
+      });
+      if (registerInput.password !== registerInput.passwordconfirm) {
+        setErr((cur) => ({
+          ...cur,
+          passwordconfirm: "password and confirmed-password did not match",
+        }));
+      }
+      if (
+        !err.username &&
+        !err.email &&
+        !err.password &&
+        !err.passwordconfirm
+      ) {
+        await axios.post("/customer/register", registerInput);
+        history.push("/login");
+      }
+    } catch (err) {}
+  };
+
   return (
     <div className="flex flex-start justify-center my-3 ">
       <img className="w-2/4 h-auto round-l-lg" src={Image} />
@@ -32,49 +87,64 @@ function Register() {
                 <div class="text-2xl font-thin text-center ">
                   Create your account
                 </div>
-                <form class="mt-8" x-data="{password: '',password_confirm: ''}">
+                <form class="mt-8">
                   <div class="mx-auto max-w-lg ">
                     <div class="py-1">
                       <span class="px-1 text-sm text-gray-600">Username</span>
                       <input
-                        placeholder=""
-                        type="text"
                         class="text-md block px-3 py-2 rounded-lg w-full
                 bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        name="username"
+                        
+                        type="text"
+                        value={registerInput.username}
+                        onChange={handleChangeInput}
                       />
+                      {err.username && <ErrFeedback err={err.username}/>}
                     </div>
                     <div class="py-1">
                       <span class="px-1 text-sm text-gray-600">Email</span>
                       <input
-                        placeholder=""
-                        type="email"
                         class="text-md block px-3 py-2 rounded-lg w-full
                 bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        placeholder=""
+                        name="email"
+                        type="email"
+                        value={registerInput.email}
+                        onChange={handleChangeInput}
                       />
+                      {err.email && <ErrFeedback err={err.email}/>}
                     </div>
                     <div class="py-1">
                       <span class="px-1 text-sm text-gray-600">Password</span>
                       <input
-                        placeholder=""
-                        type="password"
-                        x-model="password"
                         class="text-md block px-3 py-2 rounded-lg w-full
                 bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={registerInput.password}
+                        onChange={handleChangeInput}
                       />
+                      {err.password && <ErrFeedback err={err.password}/>}
                     </div>
                     <div class="py-1">
                       <span class="px-1 text-sm text-gray-600">
                         Password Confirm
                       </span>
+                      
                       <input
-                        placeholder=""
-                        type="password"
-                        x-model="password_confirm"
                         class="text-md block px-3 py-2 rounded-lg w-full
                 bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        name="passwordconfirm"
+                        id="passwordconfirm"
+                        type="password"
+                        value={registerInput.passwordconfirm}
+                        onChange={handleChangeInput}
                       />
+                      {err.passwordconfirm && <ErrFeedback err={err.passwordconfirm}/>}
                     </div>
-                    <div class="flex justify-start mt-3 ml-4 p-1">
+                    {/* <div class="flex justify-start mt-3 ml-4 p-1">
                       <ul>
                         <li class="flex items-center py-1">
                           <div
@@ -143,12 +213,14 @@ function Register() {
                           ></span>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                     <div class="flex justify-start">
                       <label class=" text-gray-500 font-bold my-4 flex items-center">
                         <input
                           class="leading-loose text-pink-600 top-0"
                           type="checkbox"
+                          onClick={handleClickCheckBox}
+                          value={clickConfirm}
                         />
                         <span class="ml-2 text-sm py-2 text-gray-600 text-left">
                           Accept the
@@ -172,6 +244,7 @@ function Register() {
                       class="mt-3 text-lg font-semibold
             bg-gray-800 w-full text-white rounded-lg
             px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+                      onClick={submitRegister}
                     >
                       Register
                     </button>
